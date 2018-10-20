@@ -38,17 +38,19 @@ class MapContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: data.filter(() => Math.random() < 1 / (24 * 60)) };
+    this.state = { data: data.filter(d => d.start === 0), start: 400 };
   }
 
   componentDidMount() {
-    setInterval(
-      () =>
-        this.setState({
-          data: data.filter(() => Math.random() < 1 / (24 * 60))
-        }),
-      500
-    );
+    setInterval(() => {
+      console.log(
+        Math.ceil(this.state.start / 60) + ":" + (this.state.start % 60)
+      );
+      this.setState({
+        data: data.filter(d => d.start === this.state.start),
+        start: this.state.start + 1
+      });
+    }, 1000);
   }
 
   render() {

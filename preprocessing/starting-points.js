@@ -1,5 +1,9 @@
 const csv = require("csvtojson");
 const fs = require("fs");
+const moment = require("moment");
+
+const getMinutesOfDay = date =>
+  moment(date).diff(moment(date).startOf("day"), "minutes");
 
 Promise.all([
   csv().fromFile("../data/raw/Stations_2018.csv"),
@@ -14,7 +18,9 @@ Promise.all([
     JSON.stringify(
       april.map(d => ({
         lat: stationsByCode[d.start_station_code].latitude,
-        lng: stationsByCode[d.start_station_code].longitude
+        lng: stationsByCode[d.start_station_code].longitude,
+        start: getMinutesOfDay(d.start_date),
+        end: getMinutesOfDay(d.end_date)
       }))
     ),
     res => console.log(res)
