@@ -20,7 +20,8 @@ Promise.all([
         lat: stationsByCode[d.start_station_code].latitude,
         lng: stationsByCode[d.start_station_code].longitude,
         start: getMinutesOfDay(d.start_date),
-        end: getMinutesOfDay(d.end_date)
+        end: getMinutesOfDay(d.end_date),
+        weight: 1
       }))
     ),
     res => console.log(res)

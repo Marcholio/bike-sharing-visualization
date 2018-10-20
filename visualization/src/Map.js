@@ -38,19 +38,28 @@ class MapContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: data.filter(d => d.start === 0), start: 400 };
+    this.state = {
+      data: data.filter(d => d.start <= 0 && d.end <= 0),
+      start: 300
+    };
   }
 
   componentDidMount() {
     setInterval(() => {
       console.log(
-        Math.ceil(this.state.start / 60) + ":" + (this.state.start % 60)
+        Math.ceil(this.state.start / 60) +
+          ":" +
+          (this.state.start % 60) +
+          " - " +
+          this.state.data.length
       );
       this.setState({
-        data: data.filter(d => d.start === this.state.start),
+        data: data
+          .filter(d => d.start <= this.state.start && d.end >= this.state.start)
+          .concat([...new Array(50)].map(d => ({ lat: 45, lng: -74 }))),
         start: this.state.start + 1
       });
-    }, 1000);
+    }, 500);
   }
 
   render() {
