@@ -18,7 +18,7 @@ const gradient = [
   "rgba(255, 0, 0, 1)"
 ];
 
-const data = require("./data/stations.json");
+const data = require("./data/starting-points.json");
 
 const HeatMapComponent = props => {
   return (
@@ -38,13 +38,16 @@ class MapContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: data.filter(() => Math.random() > 0.2) };
+    this.state = { data: data.filter(() => Math.random() < 1 / (24 * 60)) };
   }
 
   componentDidMount() {
     setInterval(
-      () => this.setState({ data: data.filter(() => Math.random() > 0.2) }),
-      2000
+      () =>
+        this.setState({
+          data: data.filter(() => Math.random() < 1 / (24 * 60))
+        }),
+      500
     );
   }
 
