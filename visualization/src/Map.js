@@ -1,6 +1,8 @@
 import React from "react";
 import { GoogleApiWrapper, Map, HeatMap } from "google-maps-react";
 
+const darkTheme = require("./dark-theme.json");
+
 const gradient = [
   "rgba(0, 255, 255, 0)",
   "rgba(0, 255, 255, 1)",
@@ -19,6 +21,9 @@ const gradient = [
 ];
 
 const data = require("./data/starting-points.json");
+
+const step = 10;
+const startTime = 300;
 
 const HeatMapComponent = props => {
   return (
@@ -39,35 +44,42 @@ class MapContainer extends React.Component {
     super(props);
 
     this.state = {
-      data: data.filter(d => d.start <= 0 && d.end <= 0),
-      start: 300
+      data: data.filter(d => d.time >= startTime && d.time < startTime + step),
+      time: startTime
     };
   }
 
   componentDidMount() {
     setInterval(() => {
       console.log(
-        Math.ceil(this.state.start / 60) +
+        Math.floor(this.state.time / 60) +
           ":" +
-          (this.state.start % 60) +
+          (this.state.time % 60) +
           " - " +
           this.state.data.length
       );
       this.setState({
         data: data
-          .filter(d => d.start <= this.state.start && d.end >= this.state.start)
+          .filter(
+            d => d.time >= this.state.time && d.time < this.state.time + step
+          )
           .concat([...new Array(50)].map(d => ({ lat: 45, lng: -74 }))),
-        start: this.state.start + 1
+        time: (this.state.time + step) % (24 * 60)
       });
-    }, 500);
+    }, 1000);
   }
 
   render() {
+    const isNight =
+      Math.ceil(this.state.time / 60) < 8 ||
+      Math.ceil(this.state.time / 60) > 20;
     return (
       <Map
+        key={isNight}
         google={this.props.google}
         initialCenter={{ lat: 45.4907962, lng: -73.6155126 }}
         zoom={12}
+        styles={isNight ? darkTheme : null}
       >
         <HeatMapComponent data={this.state.data} />
       </Map>
