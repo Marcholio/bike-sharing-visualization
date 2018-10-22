@@ -20,7 +20,7 @@ const gradient = [
   "rgba(255, 0, 0, 1)"
 ];
 
-const data = require("./data/starting-points.json");
+const data = require("./data/mid-points.json");
 
 const step = 10;
 const startTime = 300;
@@ -74,15 +74,21 @@ class MapContainer extends React.Component {
       Math.ceil(this.state.time / 60) < 8 ||
       Math.ceil(this.state.time / 60) > 20;
     return (
-      <Map
-        key={isNight}
-        google={this.props.google}
-        initialCenter={{ lat: 45.4907962, lng: -73.6155126 }}
-        zoom={12}
-        styles={isNight ? darkTheme : null}
-      >
-        <HeatMapComponent data={this.state.data} />
-      </Map>
+      <div>
+        <div id={"clock"}>
+          {Math.floor(this.state.time / 60)}:
+          {`${this.state.time % 60 < 10 ? "0" : ""}${this.state.time % 60}`}
+        </div>
+        <Map
+          key={isNight}
+          google={this.props.google}
+          initialCenter={{ lat: 45.51809, lng: -73.58809 }}
+          zoom={13}
+          styles={isNight ? darkTheme : null}
+        >
+          <HeatMapComponent data={this.state.data} />
+        </Map>
+      </div>
     );
   }
 }
