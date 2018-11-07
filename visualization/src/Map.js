@@ -45,28 +45,28 @@ class MapContainer extends React.Component {
 
     this.state = {
       data: data.filter(d => d.time >= startTime && d.time < startTime + step),
-      time: startTime
+      time: startTime,
+      paused: false
     };
   }
 
   componentDidMount() {
     setInterval(() => {
-      console.log(
-        Math.floor(this.state.time / 60) +
-          ":" +
-          (this.state.time % 60) +
-          " - " +
-          this.state.data.length
-      );
-      this.setState({
-        data: data
-          .filter(
-            d => d.time >= this.state.time && d.time < this.state.time + step
-          )
-          .concat([...new Array(50)].map(d => ({ lat: 45, lng: -74 }))),
-        time: (this.state.time + step) % (24 * 60)
-      });
+      if (!this.state.paused) {
+        this.setState({
+          data: data
+            .filter(
+              d => d.time >= this.state.time && d.time < this.state.time + step
+            )
+            .concat([...new Array(50)].map(d => ({ lat: 45, lng: -74 }))),
+          time: (this.state.time + step) % (24 * 60)
+        });
+      }
     }, 1000);
+  }
+
+  togglePause() {
+    this.setState({ paused: !this.state.paused });
   }
 
   render() {
@@ -75,7 +75,7 @@ class MapContainer extends React.Component {
       Math.ceil(this.state.time / 60) > 20;
     return (
       <div>
-        <div id={"clock"}>
+        <div id={"clock"} onClick={() => this.togglePause()}>
           {Math.floor(this.state.time / 60)}:
           {`${this.state.time % 60 < 10 ? "0" : ""}${this.state.time % 60}`}
         </div>
