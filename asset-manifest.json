@@ -1,10 +1,14 @@
 {
-  "main.js": "/static/js/main.chunk.js",
-  "main.js.map": "/static/js/main.chunk.js.map",
-  "static/js/0.chunk.js": "/static/js/0.chunk.js",
-  "static/js/0.chunk.js.map": "/static/js/0.chunk.js.map",
-  "runtime~main.js": "/static/js/bundle.js",
-  "runtime~main.js.map": "/static/js/bundle.js.map",
-  "static/media/digital-7.ttf": "/static/media/digital-7.1e670d88.ttf",
-  "index.html": "/index.html"
+  "main.css": "/bike-sharing-visualization/static/css/main.85a720be.chunk.css",
+  "main.js": "/bike-sharing-visualization/static/js/main.cbea51a0.chunk.js",
+  "main.js.map": "/bike-sharing-visualization/static/js/main.cbea51a0.chunk.js.map",
+  "static/js/1.e7eb1a8e.chunk.js": "/bike-sharing-visualization/static/js/1.e7eb1a8e.chunk.js",
+  "static/js/1.e7eb1a8e.chunk.js.map": "/bike-sharing-visualization/static/js/1.e7eb1a8e.chunk.js.map",
+  "runtime~main.js": "/bike-sharing-visualization/static/js/runtime~main.48dcb6bb.js",
+  "runtime~main.js.map": "/bike-sharing-visualization/static/js/runtime~main.48dcb6bb.js.map",
+  "static/media/App.css": "/bike-sharing-visualization/static/media/digital-7.1e670d88.ttf",
+  "static/css/main.85a720be.chunk.css.map": "/bike-sharing-visualization/static/css/main.85a720be.chunk.css.map",
+  "index.html": "/bike-sharing-visualization/index.html",
+  "precache-manifest.977f55f92a48e0ddc4b9020a26e8b81f.js": "/bike-sharing-visualization/precache-manifest.977f55f92a48e0ddc4b9020a26e8b81f.js",
+  "service-worker.js": "/bike-sharing-visualization/service-worker.js"
 }
